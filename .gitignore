@@ -1,11 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+.venv/
+ENV/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment variables
+.env
+
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
+
+# Rust
+/target/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Debug files
 rustc-ice*
 
-### IDEs
-.vscode/settings.json
-.idea/
+# Docker and Compose
+compose/grafana/data/
+compose/data/
+compose/prometheus/data/
+*.db
 
-### OS
-.DS_Store
-
-### Rust
-/target
+# Environment variables
+compose/*.env
