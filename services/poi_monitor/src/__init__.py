@@ -18,4 +18,4 @@ from .notification import SlackNotifier
 from .monitor import main
 
 __version__ = "0.1.0"
-__all__ = ['PoiAnalyzer', 'Database', 'SlackNotifier', 'main']
+__all__ = ["PoiAnalyzer", "Database", "SlackNotifier", "main"]
