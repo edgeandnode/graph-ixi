@@ -1,13 +1,17 @@
-name: Tests
+name: POI Monitor Tests
 
 on:
   push:
+    paths:
+      - 'services/poi_monitor/**'
     branches: [ main ]
   pull_request:
+    paths:
+      - 'services/poi_monitor/**'
     branches: [ main ]
 
 jobs:
-  test:
+  poi-monitor-test:
     runs-on: ubuntu-latest
     
     services:
@@ -43,7 +47,8 @@ jobs:
     - name: Run tests
       run: |
         cd services/poi_monitor
-        pytest tests/ --cov=src --cov-report=xml
+        pip install -e .
+        pytest tests/ --cov=src --cov-report=term-missing
       env:
         POSTGRES_HOST: localhost
         POSTGRES_PORT: 5433
