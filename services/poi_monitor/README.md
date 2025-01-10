@@ -69,6 +69,7 @@ The POI monitor requires several steps to run:
 # 1. Start postgres database
 docker-compose -f compose/dev.dependencies.yml up -d postgres
 # pgAdmin 4 should now be able to connect to the database
+# localhost:8000/graphql should not be accessible yet
 
 # 2. Before we start the graphix service, we need to set the database URL:
 export GRAPHIX_DB_URL=postgresql://postgres:password@localhost:5433/graphix
@@ -86,7 +87,7 @@ docker-compose -f compose/dev.dependencies.yml up poi-monitor # Start the POI mo
 ### Running Tests
 
 ```bash
-pytest tests/ --cov=src --cov-report=term-missing
+pytest services/poi_monitor/tests/ --cov=services/poi_monitor/src --cov-report=term-missing
 ```
 
 ### Project Structure
