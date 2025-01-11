@@ -32,6 +32,7 @@ ENV/
 
 # Environment variables
 .env
+compose\.env
 
 # Coverage
 .coverage
