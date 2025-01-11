@@ -1,0 +1,62 @@
+name: POI Monitor Tests
+
+on:
+  push:
+    paths:
+      - 'services/poi_monitor/**'
+    branches: [ main ]
+  pull_request:
+    paths:
+      - 'services/poi_monitor/**'
+    branches: [ main ]
+
+jobs:
+  poi-monitor-test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: graphix
+        ports:
+          - 5433:5433
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        
+    - name: Install dependencies
+      run: |
+        cd services/poi_monitor
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+        
+    - name: Run tests
+      run: |
+        cd services/poi_monitor
+        pip install -e .
+        pytest tests/ --cov=src --cov-report=term-missing
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5433
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: graphix
+        
+    - name: Upload coverage report
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./services/poi_monitor/coverage.xml 
